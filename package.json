@@ -15,7 +15,7 @@
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
-    "@pwabuilder/cli": "^0.1.1",
+    "@pwabuilder/cli": "latest",
     "@types/canvas-confetti": "^1.6.4",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",

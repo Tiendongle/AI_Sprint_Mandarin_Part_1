@@ -32,18 +32,20 @@ jobs:
           distribution: "temurin"
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install || (sleep 5 && npm install)
 
       - name: Build PWA
         run: npm run build
 
       - name: Generate Android Project
         run: |
-          # Using the version pinned in package.json
+          # Use npx to ensure the latest runner if the local devDep fails
           npx @pwabuilder/cli android --url https://ai-sprint-mandarin-part-1.vercel.app/ --output ./android-pkg --yes
 
       - name: Build APK with Gradle
         run: |
+          # PWABuilder often nests the source in a 'source' folder
           if [ -d "./android-pkg/source" ]; then
             cd android-pkg/source
           else
@@ -72,8 +74,11 @@ jobs:
           body: |
             ## 📱 Android App (v${{ github.ref_name }})
 
-            This release contains the latest Android APK for Mandarin Sprint, built directly from the Vercel-hosted PWA.
+            Built from: https://ai-sprint-mandarin-part-1.vercel.app/
 
-            **Web Version:** https://ai-sprint-mandarin-part-1.vercel.app/
+            ### Installation:
+            1. Download the APK.
+            2. Open on Android.
+            3. Grant "Install from unknown sources" permission.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
