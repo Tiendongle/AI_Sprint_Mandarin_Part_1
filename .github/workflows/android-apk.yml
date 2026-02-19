@@ -1,0 +1,55 @@
+
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build PWA
+        run: npm run build
+
+      - name: Generate Android Project
+        run: |
+          # IMPORTANT: Update the URL below to your actual GitHub Pages URL
+          # Example: https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/
+          npx @pwabuilder/cli android --url https://ai-sprint-mandarin-part-1.vercel.app/ --output ./android-pkg
+          
+      - name: Build APK with Gradle
+        run: |
+          cd android-pkg/source
+          chmod +x gradlew
+          ./gradlew assembleRelease
+
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: mandarin-sprint-release-apk
+          path: android-pkg/source/app/build/outputs/apk/release/*.apk
