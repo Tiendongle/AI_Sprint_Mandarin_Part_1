@@ -1,3 +1,4 @@
+
 name: Build and Release Android APK
 
 on:
@@ -5,7 +6,7 @@ on:
     branches:
       - main
     tags:
-      - "v*"
+      - 'v*'
   workflow_dispatch:
 
 permissions:
@@ -28,29 +29,25 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          java-version: "17"
-          distribution: "temurin"
+          java-version: '17'
+          distribution: 'temurin'
 
       - name: Install Dependencies
-        run: |
-          npm install || (sleep 5 && npm install)
+        run: npm install
 
-      - name: Build PWA
-        run: npm run build
-
-      - name: Generate Android Project
+      - name: Generate Temporary Keystore
         run: |
-          # Use npx to ensure the latest runner if the local devDep fails
-          npx @pwabuilder/cli android --url https://ai-sprint-mandarin-part-1.vercel.app/ --output ./android-pkg --yes
+          keytool -genkey -v -keystore android.keystore -alias android -keyalg RSA -keysize 2048 -validity 10000 -storepass password -keypass password -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
+
+      - name: Build Android Project with Bubblewrap
+        run: |
+          # Use npx to run bubblewrap. It will read twa-manifest.json automatically.
+          # We use yes to skip interactive prompts
+          yes | npx @bubblewrap/cli build --skipSigning
 
       - name: Build APK with Gradle
         run: |
-          # PWABuilder often nests the source in a 'source' folder
-          if [ -d "./android-pkg/source" ]; then
-            cd android-pkg/source
-          else
-            cd android-pkg
-          fi
+          cd ./
           chmod +x gradlew
           ./gradlew assembleRelease
 
@@ -58,27 +55,22 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mandarin-sprint-apk
-          path: |
-            android-pkg/source/app/build/outputs/apk/release/*.apk
-            android-pkg/app/build/outputs/apk/release/*.apk
+          path: app/build/outputs/apk/release/*.apk
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            android-pkg/source/app/build/outputs/apk/release/*.apk
-            android-pkg/app/build/outputs/apk/release/*.apk
+          files: app/build/outputs/apk/release/*.apk
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           body: |
             ## 📱 Android App (v${{ github.ref_name }})
-
-            Built from: https://ai-sprint-mandarin-part-1.vercel.app/
-
-            ### Installation:
-            1. Download the APK.
-            2. Open on Android.
-            3. Grant "Install from unknown sources" permission.
+            
+            This APK was built using Google's Bubblewrap CLI from the PWA hosted at:
+            https://ai-sprint-mandarin-part-1.vercel.app/
+            
+            ### ⚠️ Note:
+            This is an unsigned/debug-signed build for testing. You may need to bypass "Play Protect" warnings during installation.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

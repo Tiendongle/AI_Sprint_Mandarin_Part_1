@@ -1,3 +1,4 @@
+
 {
   "name": "mandarin-sprint",
   "private": true,
@@ -15,7 +16,7 @@
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
-    "@pwabuilder/cli": "latest",
+    "@bubblewrap/cli": "^1.18.1",
     "@types/canvas-confetti": "^1.6.4",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
