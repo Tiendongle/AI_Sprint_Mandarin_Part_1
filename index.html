@@ -1,94 +1,107 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Mandarin Sprint</title>
-  
-  <!-- PWA Meta Tags -->
-  <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#121212">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Mandarin Sprint">
-  <link rel="apple-touch-icon" href="./icon.svg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>Mandarin Sprint</title>
 
-  <!-- External Resources -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <style>
-    body {
-      -webkit-tap-highlight-color: transparent;
-      overflow-x: hidden;
-      background-color: #121212;
-      /* Account for iOS safe areas */
-      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-    }
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-    }
-    .scroll-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .flashcard {
-      perspective: 1000px;
-    }
-    .flashcard-inner {
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      transform-style: preserve-3d;
-    }
-    .flashcard.flipped .flashcard-inner {
-      transform: rotateY(180deg);
-    }
-    .flashcard-front, .flashcard-back {
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-    }
-    .flashcard-back {
-      transform: rotateY(180deg);
-    }
-  </style>
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#121212" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Mandarin Sprint" />
+    <link rel="apple-touch-icon" href="./icon.svg" />
 
-<script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "vite": "https://esm.sh/vite@^7.3.1",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.4",
-    "path": "https://esm.sh/path@^0.12.7",
-    "url": "https://esm.sh/url@^0.11.4"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
-<body>
-  <div id="root"></div>
-  
-  <!-- Application Entry Point -->
-  <script type="module" src="./index.tsx"></script>
-  
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').then(reg => {
-          console.log('SW registered:', reg.scope);
-        }).catch(err => {
-          console.log('SW registration failed:', err);
+    <!-- External Resources -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      body {
+        -webkit-tap-highlight-color: transparent;
+        overflow-x: hidden;
+        background-color: #121212;
+        /* Account for iOS safe areas */
+        padding: env(safe-area-inset-top) env(safe-area-inset-right)
+          env(safe-area-inset-bottom) env(safe-area-inset-left);
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
+      .scroll-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .flashcard {
+        perspective: 1000px;
+      }
+      .flashcard-inner {
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
+      }
+      .flashcard.flipped .flashcard-inner {
+        transform: rotateY(180deg);
+      }
+      .flashcard-front,
+      .flashcard-back {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
+      .flashcard-back {
+        transform: rotateY(180deg);
+      }
+    </style>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "react/": "https://esm.sh/react@^19.2.4/",
+          "react": "https://esm.sh/react@^19.2.4",
+          "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+          "vite": "https://esm.sh/vite@^7.3.1",
+          "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.4",
+          "path": "https://esm.sh/path@^0.12.7",
+          "url": "https://esm.sh/url@^0.11.4",
+          "canvas-confetti": "https://esm.sh/canvas-confetti@^1.9.4",
+          "framer-motion": "https://esm.sh/framer-motion@^12.34.2"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- Application Entry Point -->
+    <script type="module" src="./index.tsx"></script>
+
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("./sw.js")
+            .then((reg) => {
+              console.log("SW registered:", reg.scope);
+            })
+            .catch((err) => {
+              console.log("SW registration failed:", err);
+            });
         });
-      });
-    }
-  </script>
-<script type="module" src="/index.tsx"></script>
-</body>
+      }
+    </script>
+  </body>
 </html>

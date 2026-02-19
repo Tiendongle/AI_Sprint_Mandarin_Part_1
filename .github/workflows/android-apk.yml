@@ -1,10 +1,11 @@
-
-name: Build Android APK
+name: Build and Release Android APK
 
 on:
   push:
     branches:
       - main
+    tags:
+      - "v*"
   workflow_dispatch:
 
 permissions:
@@ -12,7 +13,7 @@ permissions:
   actions: write
 
 jobs:
-  build:
+  build-and-release:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,8 +28,8 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
 
       - name: Install Dependencies
         run: npm install
@@ -38,18 +39,41 @@ jobs:
 
       - name: Generate Android Project
         run: |
-          # IMPORTANT: Update the URL below to your actual GitHub Pages URL
-          # Example: https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/
-          npx @pwabuilder/cli android --url https://ai-sprint-mandarin-part-1.vercel.app/ --output ./android-pkg
-          
+          # Using the version pinned in package.json
+          npx @pwabuilder/cli android --url https://ai-sprint-mandarin-part-1.vercel.app/ --output ./android-pkg --yes
+
       - name: Build APK with Gradle
         run: |
-          cd android-pkg/source
+          if [ -d "./android-pkg/source" ]; then
+            cd android-pkg/source
+          else
+            cd android-pkg
+          fi
           chmod +x gradlew
           ./gradlew assembleRelease
 
-      - name: Upload Android APK
+      - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: mandarin-sprint-release-apk
-          path: android-pkg/source/app/build/outputs/apk/release/*.apk
+          name: mandarin-sprint-apk
+          path: |
+            android-pkg/source/app/build/outputs/apk/release/*.apk
+            android-pkg/app/build/outputs/apk/release/*.apk
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            android-pkg/source/app/build/outputs/apk/release/*.apk
+            android-pkg/app/build/outputs/apk/release/*.apk
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: |
+            ## 📱 Android App (v${{ github.ref_name }})
+
+            This release contains the latest Android APK for Mandarin Sprint, built directly from the Vercel-hosted PWA.
+
+            **Web Version:** https://ai-sprint-mandarin-part-1.vercel.app/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
