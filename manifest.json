@@ -1,0 +1,46 @@
+{
+  "name": "Mandarin Sprint: 30-Day Challenge",
+  "short_name": "MandarinSprint",
+  "id": "com.mandarinsprint.app",
+  "description": "Master 150 high-frequency Mandarin characters in 30 days with integrated audio and flashcards.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#FF4D4D",
+  "orientation": "portrait",
+  "categories": ["education", "books", "lifestyle"],
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Flashcards",
+      "short_name": "Review",
+      "description": "Jump to your daily flashcards",
+      "url": "./?tab=FLASHCARDS"
+    },
+    {
+      "name": "Tone Guide",
+      "short_name": "Tones",
+      "description": "Practice your tones",
+      "url": "./?tab=TONES"
+    }
+  ]
+}

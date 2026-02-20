@@ -34,6 +34,26 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
+      # NEW: Cache Global NPM packages to speed up Bubblewrap CLI installation
+      - name: Cache NPM Global
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      # NEW: Cache Gradle dependencies (This saves the most time!)
+      - name: Cache Gradle Packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli
 
@@ -65,7 +85,6 @@ jobs:
             -keypass android123 \
             -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
 
-      # FIXED STEP: Generate the manifest directly instead of relying on the flaky 'init' command
       - name: Generate twa-manifest.json
         run: |
           mkdir -p twa-output
@@ -75,6 +94,8 @@ jobs:
             "host": "ai-sprint-mandarin-part-1.vercel.app",
             "name": "Mandarin Sprint",
             "launcherName": "Sprint",
+            "appVersionCode": ${{ github.run_number }},
+            "appVersionName": "1.0.${{ github.run_number }}",
             "themeColor": "#FFFFFF",
             "navigationColor": "#FFFFFF",
             "backgroundColor": "#FFFFFF",
@@ -103,7 +124,6 @@ jobs:
           BUBBLEWRAP_KEY_PASSWORD: android123
         working-directory: ./twa-output
         run: |
-          # Use 'yes' to pipe through any lingering prompts during the build
           yes | bubblewrap build --skipPwaValidation
 
       - name: List build outputs
