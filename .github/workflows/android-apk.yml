@@ -39,9 +39,6 @@ jobs:
 
       - name: Configure Bubblewrap (skip interactive JDK/SDK prompts)
         run: |
-          # Create the bubblewrap config directory and config file.
-          # This tells bubblewrap where JDK and Android SDK live,
-          # so it won't prompt interactively to install them.
           mkdir -p ~/.bubblewrap
           cat > ~/.bubblewrap/config.json << EOF
           {
@@ -49,12 +46,8 @@ jobs:
             "androidSdkPath": "$ANDROID_HOME"
           }
           EOF
-
-          # Verify the config
           echo "Bubblewrap config:"
           cat ~/.bubblewrap/config.json
-
-          # Validate bubblewrap can find JDK and SDK
           bubblewrap doctor || true
 
       - name: Accept Android SDK Licenses
@@ -72,12 +65,37 @@ jobs:
             -keypass android123 \
             -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
 
-      - name: Initialize Bubblewrap TWA Project
-        env:
-          BUBBLEWRAP_KEYSTORE_PASSWORD: android123
-          BUBBLEWRAP_KEY_PASSWORD: android123
+      # FIXED STEP: Generate the manifest directly instead of relying on the flaky 'init' command
+      - name: Generate twa-manifest.json
         run: |
-          mkdir -p twa-output && cd twa-output
+          mkdir -p twa-output
+          cat <<EOF > twa-output/twa-manifest.json
+          {
+            "packageId": "com.mandarinsprint.twa",
+            "host": "ai-sprint-mandarin-part-1.vercel.app",
+            "name": "Mandarin Sprint",
+            "launcherName": "Sprint",
+            "themeColor": "#FFFFFF",
+            "navigationColor": "#FFFFFF",
+            "backgroundColor": "#FFFFFF",
+            "startUrl": "/",
+            "iconUrl": "https://ai-sprint-mandarin-part-1.vercel.app/icon.png",
+            "maskableIconUrl": "https://ai-sprint-mandarin-part-1.vercel.app/icon.png",
+            "splashScreenFadeOutDuration": 300,
+            "enableNotifications": true,
+            "shortcuts": [],
+            "generatorApp": "bubblewrap-cli",
+            "fallbackType": "customtabs",
+            "features": {},
+            "alphaDependencies": {
+              "enabled": false
+            },
+            "signingKey": {
+              "path": "${{ github.workspace }}/android.keystore",
+              "alias": "android"
+            }
+          }
+          EOF
 
       - name: Build APK with Bubblewrap
         env:
@@ -85,10 +103,8 @@ jobs:
           BUBBLEWRAP_KEY_PASSWORD: android123
         working-directory: ./twa-output
         run: |
-          bubblewrap build \
-            --signingKeyPath=${{ github.workspace }}/android.keystore \
-            --signingKeyAlias=android \
-            --skipPwaValidation
+          # Use 'yes' to pipe through any lingering prompts during the build
+          yes | bubblewrap build --skipPwaValidation
 
       - name: List build outputs
         run: |
@@ -108,7 +124,9 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: twa-output/app-release-signed.apk
+          files: |
+            twa-output/app-release-signed.apk
+            twa-output/app-release-bundle.aab
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           body: |
@@ -122,29 +140,3 @@ jobs:
             "Play Protect" warnings during installation.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-# ============================================================================
-# IMPORTANT NOTES:
-# ============================================================================
-#
-# 1. BUBBLEWRAP + CI IS NOTORIOUSLY FLAKY
-#    Bubblewrap's interactive prompts are a known issue in CI environments.
-#    See: https://github.com/GoogleChromeLabs/bubblewrap/issues/806
-#    The ~/.bubblewrap/config.json pre-creation trick is the best workaround.
-#
-# 2. FALLBACK: COMMIT THE TWA PROJECT
-#    If `bubblewrap init` keeps failing in CI, the most reliable approach is:
-#    a) Run `bubblewrap init` locally on your machine once
-#    b) Commit the generated twa-manifest.json and project files to your repo
-#    c) In CI, just run `bubblewrap build` (skip the init step entirely)
-#
-# 3. YOUR PWA NEEDS A VALID manifest.json
-#    Make sure https://ai-sprint-mandarin-part-1.vercel.app/manifest.json
-#    exists and has at minimum: name, short_name, start_url, display, icons.
-#    Without this, bubblewrap init will fail.
-#
-# 4. ALTERNATIVE: USE THE OFFICIAL DOCKER IMAGE
-#    If all else fails, you can use the official bubblewrap container:
-#      container: ghcr.io/googlechromelabs/bubblewrap:latest
-#    This has JDK + Android SDK pre-installed, but still has the
-#    interactive prompt issue unfortunately.
-# ============================================================================
