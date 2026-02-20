@@ -42,12 +42,12 @@ jobs:
           # Ensure config directory exists
           mkdir -p ~/.bubblewrap
 
-          # Get absolute paths from the runner environment
-          # On GH Actions, these are the standard locations
-          SDK_PATH="/usr/local/lib/android/sdk"
-          JDK_PATH="$JAVA_HOME"
+          # Map paths correctly for GitHub runner
+          # SDK_PATH is the standard location on Ubuntu-latest
+          SDK_PATH=$ANDROID_HOME
+          JDK_PATH=$JAVA_HOME
 
-          # Create the config.json that Bubblewrap looks for
+          # Create the config.json that Bubblewrap expects
           echo "{\"jdkPath\":\"$JDK_PATH\",\"androidSdkPath\":\"$SDK_PATH\"}" > ~/.bubblewrap/config.json
 
           echo "Bubblewrap Configured:"
@@ -56,19 +56,14 @@ jobs:
 
       - name: Accept Android SDK Licenses
         run: |
-          # Explicitly target the sdkmanager and provide the sdk_root to ensure 
-          # licenses are written to the correct location for Bubblewrap/Gradle.
-          # We use a loop to ensure 'y' is sent repeatedly for every prompt.
-          # Some environments require the --sdk_root flag to properly identify all packages.
-          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_HOME" --licenses || true
+          # Sometimes sdkmanager --licenses doesn't find all packages unless forced.
+          # We update the sdkmanager itself and then accept all licenses.
+          echo "Accepting all Android SDK licenses..."
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses --sdk_root=$ANDROID_HOME
 
-          # Fallback: manually check if licenses directory exists and print status
-          if [ -d "$ANDROID_HOME/licenses" ]; then
-            echo "Licenses accepted and directory created at $ANDROID_HOME/licenses"
-            ls "$ANDROID_HOME/licenses"
-          else
-            echo "Warning: Licenses directory not found. Build might fail."
-          fi
+          # Proactively install common build tools Bubblewrap might request
+          echo "Installing build-tools and platforms..."
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME "build-tools;34.0.0" "platforms;android-34"
 
       - name: Setup Android Keystore
         run: |
@@ -85,18 +80,14 @@ jobs:
 
       - name: Build Android Project with Bubblewrap
         env:
-          # Explicitly set paths for Bubblewrap logic
+          # Injecting variables into the environment for Bubblewrap fallback logic
           BUBBLEWRAP_JDK_PATH: ${{ env.JAVA_HOME }}
-          BUBBLEWRAP_ANDROID_SDK_PATH: /usr/local/lib/android/sdk
-          ANDROID_HOME: /usr/local/lib/android/sdk
-          ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+          BUBBLEWRAP_ANDROID_SDK_PATH: ${{ env.ANDROID_HOME }}
         run: |
-          # Use printf to handle the multi-step prompt process in a non-interactive way.
-          # 1. SDK path (if prompted)
-          # 2. JDK path (if prompted)
-          # 3. Key Store password
-          # 4. Key password
-          printf "/usr/local/lib/android/sdk\n$JAVA_HOME\nsprint123\nsprint123\n" | npx @bubblewrap/cli build \
+          # We use 'yes' to pipe 'y' to any unexpected prompts (like SDK/JDK confirmation).
+          # Bubblewrap CLI flags for passwords should take precedence, but 'yes' acts as a safety net.
+          # We wrap the command to ensure it doesn't hang on prompts.
+          yes | npx @bubblewrap/cli build \
             --signingKeyPath ./android.keystore \
             --signingKeyAlias android \
             --signingKeyPassword "sprint123" \
