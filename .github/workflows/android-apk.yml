@@ -72,6 +72,13 @@ jobs:
             -keypass android123 \
             -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
 
+      - name: Initialize Bubblewrap TWA Project
+        env:
+          BUBBLEWRAP_KEYSTORE_PASSWORD: android123
+          BUBBLEWRAP_KEY_PASSWORD: android123
+        run: |
+          mkdir -p twa-output && cd twa-output
+
       - name: Build APK with Bubblewrap
         env:
           BUBBLEWRAP_KEYSTORE_PASSWORD: android123
