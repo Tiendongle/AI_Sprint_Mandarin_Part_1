@@ -72,19 +72,6 @@ jobs:
             -keypass android123 \
             -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
 
-      - name: Initialize Bubblewrap TWA Project
-        env:
-          BUBBLEWRAP_KEYSTORE_PASSWORD: android123
-          BUBBLEWRAP_KEY_PASSWORD: android123
-        run: |
-          mkdir -p twa-output && cd twa-output
-
-          # Run init non-interactively by piping 'yes' to accept defaults.
-          # Bubblewrap init pulls the web manifest and generates the Android project.
-          yes "" | bubblewrap init \
-          --manifest="https://ai-sprint-mandarin-part-1.vercel.app/twa-manifest.json"
-            || true
-
       - name: Build APK with Bubblewrap
         env:
           BUBBLEWRAP_KEYSTORE_PASSWORD: android123
