@@ -31,6 +31,26 @@ jobs:
           java-version: "17"
           distribution: "temurin"
 
+      - name: Generate Permanent Keystore (Temporary Step)
+        run: |
+          # 1. Generate the keystore
+          keytool -genkey -v -keystore android.keystore -alias android -keyalg RSA -keysize 2048 -validity 10000 -storepass android123 -keypass android123 -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
+
+          # 2. Extract the SHA-256 fingerprint to a text file
+          keytool -list -v -keystore android.keystore -alias android -storepass android123 | grep "SHA256: " > sha256_fingerprint.txt
+
+          # 3. Convert the keystore to a Base64 string text file
+          base64 -w 0 android.keystore > keystore_base64.txt
+
+      - name: Upload Keystore Files
+        uses: actions/upload-artifact@v4
+        with:
+          name: permanent-keystore-files
+          path: |
+            android.keystore
+            sha256_fingerprint.txt
+            keystore_base64.txt
+
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
