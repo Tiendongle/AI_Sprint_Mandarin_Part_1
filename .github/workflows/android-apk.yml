@@ -15,11 +15,7 @@ permissions:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
-    env:
-      # These map the runner's pre-installed tools to Bubblewrap's expected variables
-      BUBBLEWRAP_ANDROID_SDK_PATH: /usr/local/lib/android/sdk
-      BUBBLEWRAP_JDK_PATH: /usr/lib/jvm/temurin-17-jdk-amd64
-      ANDROID_HOME: /usr/local/lib/android/sdk
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -41,21 +37,26 @@ jobs:
       - name: Build PWA
         run: npm run build
 
-      - name: Configure Bubblewrap Paths
+      - name: Configure Bubblewrap
         run: |
           # Create the config directory
           mkdir -p ~/.bubblewrap
-          # Manually write the config.json that Bubblewrap expects to find.
-          # Using environment variables provided by the GitHub runner (JAVA_HOME and ANDROID_HOME).
+
+          # Use absolute paths from the environment
+          # ANDROID_HOME and JAVA_HOME are set by default or via setup actions
           echo "{\"jdkPath\":\"$JAVA_HOME\",\"androidSdkPath\":\"$ANDROID_HOME\"}" > ~/.bubblewrap/config.json
-          echo "Bubblewrap configured with JDK: $JAVA_HOME and SDK: $ANDROID_HOME"
+
+          echo "Bubblewrap config created at ~/.bubblewrap/config.json"
+          cat ~/.bubblewrap/config.json
 
       - name: Accept Android SDK Licenses
         run: |
+          # Bubblewrap needs licenses accepted to proceed
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
       - name: Setup Android Keystore
         run: |
+          # Generate a keystore with a 6+ character password
           keytool -genkeypair -v \
             -keystore android.keystore \
             -alias android \
@@ -67,8 +68,13 @@ jobs:
             -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
 
       - name: Build Android Project with Bubblewrap
+        env:
+          # Adding these as environment variables as well for redundancy
+          BUBBLEWRAP_JDK_PATH: ${{ env.JAVA_HOME }}
+          BUBBLEWRAP_ANDROID_SDK_PATH: ${{ env.ANDROID_HOME }}
         run: |
-          # We provide the passwords via flags to ensure a non-interactive build.
+          # Build using the twa-manifest.json in the root
+          # We pass signing info to ensure a signed APK is generated
           npx @bubblewrap/cli build \
             --signingKeyPath ./android.keystore \
             --signingKeyAlias android \
