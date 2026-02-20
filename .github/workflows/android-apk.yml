@@ -37,23 +37,6 @@ jobs:
       - name: Build PWA
         run: npm run build
 
-      - name: Configure Bubblewrap
-        run: |
-          # Ensure config directory exists
-          mkdir -p ~/.bubblewrap
-
-          # Map paths correctly for GitHub runner
-          # SDK_PATH is the standard location on Ubuntu-latest
-          SDK_PATH=$ANDROID_HOME
-          JDK_PATH=$JAVA_HOME
-
-          # Create the config.json that Bubblewrap expects
-          echo "{\"jdkPath\":\"$JDK_PATH\",\"androidSdkPath\":\"$SDK_PATH\"}" > ~/.bubblewrap/config.json
-
-          echo "Bubblewrap Configured:"
-          echo "SDK: $SDK_PATH"
-          echo "JDK: $JDK_PATH"
-
       - name: Accept Android SDK Licenses
         run: |
           # Sometimes sdkmanager --licenses doesn't find all packages unless forced.
@@ -78,12 +61,37 @@ jobs:
             -keypass "sprint123" \
             -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
 
+      - name: Configure Bubblewrap
+        run: |
+          # Ensure config directory exists
+          mkdir -p ~/.bubblewrap
+
+          # Map paths correctly for GitHub runner
+          # SDK_PATH is the standard location on Ubuntu-latest
+          SDK_PATH=$ANDROID_HOME
+          JDK_PATH=$JAVA_HOME
+
+          # Create the config.json that Bubblewrap expects
+          echo "{\"jdkPath\":\"$JDK_PATH\",\"androidSdkPath\":\"$SDK_PATH\"}" > ~/.bubblewrap/config.json
+
+          echo "Bubblewrap Configured:"
+          echo "SDK: $SDK_PATH"
+          echo "JDK: $JDK_PATH"
+
       - name: Build Android Project with Bubblewrap
         env:
           # Injecting variables into the environment for Bubblewrap fallback logic
           BUBBLEWRAP_JDK_PATH: ${{ env.JAVA_HOME }}
           BUBBLEWRAP_ANDROID_SDK_PATH: ${{ env.ANDROID_HOME }}
         run: |
+          # "Bubblewrap Configured:"
+          # "SDK: $SDK_PATH"
+          # "JDK: $JDK_PATH"
+          # "BUBBLEWRAP_ANDROID_SDK_PATH": $BUBBLEWRAP_ANDROID_SDK_PATH
+          # "BUBBLEWRAP_JDK_PATH": $BUBBLEWRAP_JDK_PATH
+          #
+          ##################################################
+          #
           # We use 'yes' to pipe 'y' to any unexpected prompts (like SDK/JDK confirmation).
           # Bubblewrap CLI flags for passwords should take precedence, but 'yes' acts as a safety net.
           # We wrap the command to ensure it doesn't hang on prompts.
