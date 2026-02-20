@@ -57,7 +57,7 @@ jobs:
       - name: Accept Android SDK Licenses
         run: |
           # sdkmanager is inside cmdline-tools
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          y | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
       - name: Setup Android Keystore
         run: |
