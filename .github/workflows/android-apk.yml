@@ -15,11 +15,6 @@ permissions:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
-    env:
-      # These map the runner's pre-installed tools to Bubblewrap's expected variables
-      BUBBLEWRAP_ANDROID_SDK_PATH: /usr/local/lib/android/sdk
-      BUBBLEWRAP_JDK_PATH: /usr/lib/jvm/temurin-17-jdk-amd64
-      ANDROID_HOME: /usr/local/lib/android/sdk
 
     steps:
       - name: Checkout Code
@@ -42,14 +37,21 @@ jobs:
       - name: Build PWA
         run: npm run build
 
+      - name: Configure Bubblewrap Paths
+        run: |
+          # Create the config directory
+          mkdir -p ~/.bubblewrap
+          # Manually write the config.json that Bubblewrap expects to find.
+          # Using environment variables provided by the GitHub runner (JAVA_HOME and ANDROID_HOME).
+          echo "{\"jdkPath\":\"$JAVA_HOME\",\"androidSdkPath\":\"$ANDROID_HOME\"}" > ~/.bubblewrap/config.json
+          echo "Bubblewrap configured with JDK: $JAVA_HOME and SDK: $ANDROID_HOME"
+
       - name: Accept Android SDK Licenses
         run: |
-          # This specifically needs 'y', so 'yes' is appropriate here
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
       - name: Setup Android Keystore
         run: |
-          # We use -storepass and -keypass to provide the 6+ character password non-interactively
           keytool -genkeypair -v \
             -keystore android.keystore \
             -alias android \
@@ -62,8 +64,7 @@ jobs:
 
       - name: Build Android Project with Bubblewrap
         run: |
-          # We removed 'yes |' to prevent it from injecting 'y' into password prompts.
-          # The flags below provide the passwords required for signing.
+          # We provide the passwords via flags to ensure a non-interactive build.
           npx @bubblewrap/cli build \
             --signingKeyPath ./android.keystore \
             --signingKeyAlias android \
