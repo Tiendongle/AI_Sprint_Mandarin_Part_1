@@ -34,100 +34,46 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build PWA
-        run: npm run build
-
-      - name: Accept Android SDK Licenses
+      - name: Generate Temporary Keystore
         run: |
-          # Sometimes sdkmanager --licenses doesn't find all packages unless forced.
-          # We update the sdkmanager itself and then accept all licenses.
-          echo "Accepting all Android SDK licenses..."
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses --sdk_root=$ANDROID_HOME
-
-          # Proactively install common build tools Bubblewrap might request
-          echo "Installing build-tools and platforms..."
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME "build-tools;34.0.0" "platforms;android-34"
-
-      - name: Setup Android Keystore
-        run: |
-          # Generate a keystore with a valid 6+ character password
-          keytool -genkeypair -v \
-            -keystore android.keystore \
-            -alias android \
-            -keyalg RSA \
-            -keysize 2048 \
-            -validity 10000 \
-            -storepass "sprint123" \
-            -keypass "sprint123" \
-            -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
-
-      - name: Configure Bubblewrap
-        run: |
-          # Ensure config directory exists
-          mkdir -p ~/.bubblewrap
-
-          # Map paths correctly for GitHub runner
-          # SDK_PATH is the standard location on Ubuntu-latest
-          SDK_PATH=$ANDROID_HOME
-          JDK_PATH=$JAVA_HOME
-
-          # Create the config.json that Bubblewrap expects
-          echo "{\"jdkPath\":\"$JDK_PATH\",\"androidSdkPath\":\"$SDK_PATH\"}" > ~/.bubblewrap/config.json
-
-          echo "Bubblewrap Configured:"
-          echo "SDK: $SDK_PATH"
-          echo "JDK: $JDK_PATH"
+          keytool -genkey -v -keystore android.keystore -alias android -keyalg RSA -keysize 2048 -validity 10000 -storepass password -keypass password -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
 
       - name: Build Android Project with Bubblewrap
-        env:
-          # Injecting variables into the environment for Bubblewrap fallback logic
-          BUBBLEWRAP_JDK_PATH: ${{ env.JAVA_HOME }}
-          BUBBLEWRAP_ANDROID_SDK_PATH: ${{ env.ANDROID_HOME }}
         run: |
-          # "Bubblewrap Configured:"
-          # "SDK: $SDK_PATH"
-          # "JDK: $JDK_PATH"
-          # "BUBBLEWRAP_ANDROID_SDK_PATH": $BUBBLEWRAP_ANDROID_SDK_PATH
-          # "BUBBLEWRAP_JDK_PATH": $BUBBLEWRAP_JDK_PATH
-          #
-          ##################################################
-          #
-          # We use 'yes' to pipe 'y' to any unexpected prompts (like SDK/JDK confirmation).
-          # Bubblewrap CLI flags for passwords should take precedence, but 'yes' acts as a safety net.
-          # We wrap the command to ensure it doesn't hang on prompts.
+          # Use npx to run bubblewrap. It will read twa-manifest.json automatically.
+          # We use yes to skip interactive prompts
           yes | npx @bubblewrap/cli build \
             --signingKeyPath ./android.keystore \
             --signingKeyAlias android \
             --signingKeyPassword "sprint123" \
             --signingStorePassword "sprint123"
 
+      - name: Build APK with Gradle
+        run: |
+          cd ./
+          chmod +x gradlew
+          ./gradlew assembleRelease
+
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: mandarin-sprint-apk
-          path: |
-            *.apk
-            app/build/outputs/apk/release/*.apk
+          path: app/build/outputs/apk/release/*.apk
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            *.apk
-            app/build/outputs/apk/release/*.apk
+          files: app/build/outputs/apk/release/*.apk
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           body: |
             ## 📱 Android App (v${{ github.ref_name }})
 
-            This release contains the latest Android APK for Mandarin Sprint.
+            This APK was built using Google's Bubblewrap CLI from the PWA hosted at:
+            https://ai-sprint-mandarin-part-1.vercel.app/
 
-            **Web Version:** https://ai-sprint-mandarin-part-1.vercel.app/
-
-            ### Installation Instructions:
-            1. Download the `app-release-signed.apk`.
-            2. Transfer to your Android device.
-            3. Open the file to install (you may need to allow "Install from unknown sources").
+            ### ⚠️ Note:
+            This is an unsigned/debug-signed build for testing. You may need to bypass "Play Protect" warnings during installation.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
