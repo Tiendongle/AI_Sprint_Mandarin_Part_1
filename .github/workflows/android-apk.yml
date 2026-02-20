@@ -56,8 +56,19 @@ jobs:
 
       - name: Accept Android SDK Licenses
         run: |
-          # sdkmanager is inside cmdline-tools
-          y | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          # Explicitly target the sdkmanager and provide the sdk_root to ensure 
+          # licenses are written to the correct location for Bubblewrap/Gradle.
+          # We use a loop to ensure 'y' is sent repeatedly for every prompt.
+          # Some environments require the --sdk_root flag to properly identify all packages.
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_HOME" --licenses || true
+
+          # Fallback: manually check if licenses directory exists and print status
+          if [ -d "$ANDROID_HOME/licenses" ]; then
+            echo "Licenses accepted and directory created at $ANDROID_HOME/licenses"
+            ls "$ANDROID_HOME/licenses"
+          else
+            echo "Warning: Licenses directory not found. Build might fail."
+          fi
 
       - name: Setup Android Keystore
         run: |
@@ -74,16 +85,17 @@ jobs:
 
       - name: Build Android Project with Bubblewrap
         env:
-          # These env vars are used by Bubblewrap if the config.json isn't picked up
+          # Explicitly set paths for Bubblewrap logic
           BUBBLEWRAP_JDK_PATH: ${{ env.JAVA_HOME }}
           BUBBLEWRAP_ANDROID_SDK_PATH: /usr/local/lib/android/sdk
+          ANDROID_HOME: /usr/local/lib/android/sdk
+          ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
         run: |
-          # We use printf to handle any residual prompts gracefully. 
-          # 1. Provide SDK Path (if prompted)
-          # 2. Provide JDK Path (if prompted)
-          # 3. Provide passwords (if prompted, though flags should handle it)
-          # The flags --signing* are the primary way to pass secrets.
-
+          # Use printf to handle the multi-step prompt process in a non-interactive way.
+          # 1. SDK path (if prompted)
+          # 2. JDK path (if prompted)
+          # 3. Key Store password
+          # 4. Key password
           printf "/usr/local/lib/android/sdk\n$JAVA_HOME\nsprint123\nsprint123\n" | npx @bubblewrap/cli build \
             --signingKeyPath ./android.keystore \
             --signingKeyAlias android \
