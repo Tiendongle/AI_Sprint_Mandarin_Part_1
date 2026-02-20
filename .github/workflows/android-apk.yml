@@ -82,8 +82,7 @@ jobs:
           # Run init non-interactively by piping 'yes' to accept defaults.
           # Bubblewrap init pulls the web manifest and generates the Android project.
           yes "" | bubblewrap init \
-          --manifest="./twa-manifest.json" \
-          --directory="./" \
+          --manifest="twa-manifest.json" \
             || true
 
       - name: Build APK with Bubblewrap
