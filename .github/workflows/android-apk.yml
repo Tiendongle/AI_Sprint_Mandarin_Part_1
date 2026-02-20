@@ -44,34 +44,47 @@ jobs:
 
       - name: Accept Android SDK Licenses
         run: |
+          # This specifically needs 'y', so 'yes' is appropriate here
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
       - name: Setup Android Keystore
         run: |
-          # Generate a keystore for signing the APK in CI
-          keytool -genkey -v -keystore android.keystore -alias android -keyalg RSA -keysize 2048 -validity 10000 -storepass password -keypass password -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
+          # We use -storepass and -keypass to provide the 6+ character password non-interactively
+          keytool -genkeypair -v \
+            -keystore android.keystore \
+            -alias android \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -storepass "sprint123" \
+            -keypass "sprint123" \
+            -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
 
       - name: Build Android Project with Bubblewrap
         run: |
-          # The 'yes' pipe handles the confirmation of paths and licenses
-          # Bubblewrap will use the environment variables defined at the job level
-          yes | npx @bubblewrap/cli build --signingKeyPath ./android.keystore --signingKeyAlias android --signingKeyPassword password --signingStorePassword password
+          # We removed 'yes |' to prevent it from injecting 'y' into password prompts.
+          # The flags below provide the passwords required for signing.
+          npx @bubblewrap/cli build \
+            --signingKeyPath ./android.keystore \
+            --signingKeyAlias android \
+            --signingKeyPassword "sprint123" \
+            --signingStorePassword "sprint123"
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: mandarin-sprint-apk
           path: |
-            app/build/outputs/apk/release/*.apk
             *.apk
+            app/build/outputs/apk/release/*.apk
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            app/build/outputs/apk/release/*.apk
             *.apk
+            app/build/outputs/apk/release/*.apk
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           body: |
