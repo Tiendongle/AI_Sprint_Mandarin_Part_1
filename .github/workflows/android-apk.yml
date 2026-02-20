@@ -73,17 +73,9 @@ jobs:
       - name: Accept Android SDK Licenses
         run: yes | sdkmanager --licenses || true
 
-      - name: Generate Keystore
+      - name: Decode Keystore
         run: |
-          keytool -genkey -v \
-            -keystore ${{ github.workspace }}/android.keystore \
-            -alias android \
-            -keyalg RSA \
-            -keysize 2048 \
-            -validity 10000 \
-            -storepass android123 \
-            -keypass android123 \
-            -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
+          echo "${{ secrets.RELEASE_KEYSTORE_BASE64 }}" | base64 -d > ${{ github.workspace }}/android.keystore
 
       - name: Generate twa-manifest.json
         run: |
