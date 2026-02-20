@@ -1,4 +1,3 @@
-
 {
   "packageId": "com.mandarinsprint.app",
   "host": "ai-sprint-mandarin-part-1.vercel.app",
@@ -12,8 +11,8 @@
   "navigationDividerColorDark": "#000000",
   "backgroundColor": "#121212",
   "startUrl": "/",
-  "iconUrl": "https://ai-sprint-mandarin-part-1.vercel.app/icon.svg",
-  "maskableIconUrl": "https://ai-sprint-mandarin-part-1.vercel.app/icon.svg",
+  "iconUrl": "https://ai-sprint-mandarin-part-1.vercel.app/icon.png",
+  "maskableIconUrl": "https://ai-sprint-mandarin-part-1.vercel.app/icon.png",
   "splashScreenFadeOutDuration": 300,
   "shortcuts": [],
   "appVersion": "1.0.0",
