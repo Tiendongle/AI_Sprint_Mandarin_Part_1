@@ -15,7 +15,11 @@ permissions:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
-
+    env:
+      # These map the runner's pre-installed tools to Bubblewrap's expected variables
+      BUBBLEWRAP_ANDROID_SDK_PATH: /usr/local/lib/android/sdk
+      BUBBLEWRAP_JDK_PATH: /usr/lib/jvm/temurin-17-jdk-amd64
+      ANDROID_HOME: /usr/local/lib/android/sdk
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
