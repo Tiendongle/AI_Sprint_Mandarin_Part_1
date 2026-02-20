@@ -1,0 +1,49 @@
+
+{
+  "packageId": "com.mandarinsprint.app",
+  "host": "ai-sprint-mandarin-part-1.vercel.app",
+  "name": "Mandarin Sprint",
+  "launcherName": "MandarinSprint",
+  "display": "standalone",
+  "themeColor": "#FF4D4D",
+  "navigationColor": "#121212",
+  "navigationColorDark": "#121212",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "backgroundColor": "#121212",
+  "startUrl": "/",
+  "iconUrl": "https://ai-sprint-mandarin-part-1.vercel.app/icon.svg",
+  "maskableIconUrl": "https://ai-sprint-mandarin-part-1.vercel.app/icon.svg",
+  "splashScreenFadeOutDuration": 300,
+  "shortcuts": [],
+  "appVersion": "1.0.0",
+  "appVersionCode": 1,
+  "signingKey": {
+    "path": "./android.keystore",
+    "alias": "android"
+  },
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://ai-sprint-mandarin-part-1.vercel.app/manifest.json",
+  "fallbackType": "customtabs",
+  "enableNotifications": false,
+  "orientation": "portrait",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "isNativeLibraryCompressible": false,
+  "enableSiteSettingsShortcut": true,
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "playBilling": {
+    "enabled": false
+  },
+  "features": {
+    "locationDelegation": {
+      "enabled": false
+    },
+    "playBilling": {
+      "enabled": false
+    }
+  }
+}
