@@ -31,49 +31,71 @@ jobs:
           java-version: "17"
           distribution: "temurin"
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Install Bubblewrap CLI
+        run: npm install -g @bubblewrap/cli
 
-      - name: Generate Temporary Keystore
+      - name: Generate Keystore
         run: |
-          keytool -genkey -v -keystore android.keystore -alias android -keyalg RSA -keysize 2048 -validity 10000 -storepass password -keypass password -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
+          keytool -genkey -v \
+            -keystore android.keystore \
+            -alias android \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -storepass android123 \
+            -keypass android123 \
+            -dname "CN=MandarinSprint, OU=Learning, O=Sprint, L=App, S=Global, C=US"
 
-      - name: Build Android Project with Bubblewrap
+      - name: Initialize Bubblewrap Project
+        env:
+          BUBBLEWRAP_KEYSTORE_PASSWORD: android123
+          BUBBLEWRAP_KEY_PASSWORD: android123
         run: |
-          # Use npx to run bubblewrap. It will read twa-manifest.json automatically.
-          # We use yes to skip interactive prompts
-          printf "y y y y y y y y y sprint123" | npx @bubblewrap/cli build \
-            --signingKeyPath ./android.keystore \
-            --signingKeyAlias android \
-            --signingKeyPassword "sprint123" \
-            --signingStorePassword "sprint123"
+          # Init the TWA project from the PWA's web manifest
+          # The --directory flag puts the generated Android project in ./twa-output
+          bubblewrap init \
+          --manifest="./twa-manifest.json" \
+          --directory="./twa-output"
 
-      - name: Build APK with Gradle
+      # If the PWA doesn't have a manifest.json at the expected URL,
+      # comment out the init step above and use a twa-manifest.json instead.
+      # You'd commit a twa-manifest.json to your repo and run:
+      #   bubblewrap init --manifest="./twa-manifest.json" --directory="./twa-output"
+
+      - name: Build APK with Bubblewrap
+        env:
+          BUBBLEWRAP_KEYSTORE_PASSWORD: android123
+          BUBBLEWRAP_KEY_PASSWORD: android123
+        working-directory: ./twa-output
         run: |
-          cd ./
-          chmod +x gradlew
-          ./gradlew assembleRelease
+          bubblewrap build \
+            --signingKeyPath=../android.keystore \
+            --signingKeyAlias=android \
+            --skipPwaValidation
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: mandarin-sprint-apk
-          path: app/build/outputs/apk/release/*.apk
+          path: |
+            twa-output/app-release-signed.apk
+            twa-output/app-release-bundle.aab
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: app/build/outputs/apk/release/*.apk
+          files: twa-output/app-release-signed.apk
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           body: |
-            ## 📱 Android App (v${{ github.ref_name }})
+            ## 📱 Android App (${{ github.ref_name }})
 
             This APK was built using Google's Bubblewrap CLI from the PWA hosted at:
             https://ai-sprint-mandarin-part-1.vercel.app/
 
             ### ⚠️ Note:
-            This is an unsigned/debug-signed build for testing. You may need to bypass "Play Protect" warnings during installation.
+            This is a debug-signed build for testing. You may need to bypass
+            "Play Protect" warnings during installation.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
