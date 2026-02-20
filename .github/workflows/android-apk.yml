@@ -42,7 +42,7 @@ jobs:
         run: |
           # Use npx to run bubblewrap. It will read twa-manifest.json automatically.
           # We use yes to skip interactive prompts
-          yes | npx @bubblewrap/cli build \
+          printf "y y y y y y y y y sprint123" | npx @bubblewrap/cli build \
             --signingKeyPath ./android.keystore \
             --signingKeyAlias android \
             --signingKeyPassword "sprint123" \
