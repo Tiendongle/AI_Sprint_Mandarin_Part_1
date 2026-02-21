@@ -1,0 +1,783 @@
+
+[
+  {
+    "day": 1,
+    "title": "Greetings",
+    "vocab": [
+      ["你", "nǐ", "You"],
+      ["好", "hǎo", "Good"],
+      ["请", "qǐng", "Please"],
+      ["问", "wèn", "Ask"],
+      ["贵", "guì", "Noble"],
+      ["姓", "xìng", "Surname"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个你怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège nǐ zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"You\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个你的意思是\"You\"",
+        "pinyin": "Zhège nǐ de yìsi shì \"You\"",
+        "english": "This \"你\" means \"You\""
+      }
+    ]
+  },
+  {
+    "day": 2,
+    "title": "Names & Identity",
+    "vocab": [
+      ["我", "wǒ", "I/Me"],
+      ["呢", "ne", "Prtcl."],
+      ["叫", "jiào", "Called"],
+      ["什", "shén", "What"],
+      ["么", "me", "Prtcl."],
+      ["名", "míng", "Name"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个我怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège wǒ zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"I/Me\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个我的意思是\"I/Me\"",
+        "pinyin": "Zhège wǒ de yìsi shì \"I/Me\"",
+        "english": "This \"我\" means \"I/Me\""
+      }
+    ]
+  },
+  {
+    "day": 3,
+    "title": "Family Basics",
+    "vocab": [
+      ["家", "jiā", "Family"],
+      ["有", "yǒu", "Have"],
+      ["爸", "bà", "Dad"],
+      ["妈", "mā", "Mom"],
+      ["哥", "gē", "Bro (O)"],
+      ["姐", "jiě", "Sis (O)"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个家怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège jiā zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Family\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个家的意思是\"Family\"",
+        "pinyin": "Zhège jiā de yìsi shì \"Family\"",
+        "english": "This \"家\" means \"Family\""
+      }
+    ]
+  },
+  {
+    "day": 4,
+    "title": "Siblings & Qty",
+    "vocab": [
+      ["弟", "dì", "Bro (Y)"],
+      ["妹", "mèi", "Sis (Y)"],
+      ["两", "liǎng", "Two"],
+      ["个", "gè", "MW"],
+      ["谁", "shéi", "Who"],
+      ["没", "méi", "Not"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个弟怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège dì zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Bro (Y)\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个弟的意思是\"Bro (Y)\"",
+        "pinyin": "Zhège dì de yìsi shì \"Bro (Y)\"",
+        "english": "This \"弟\" means \"Bro (Y)\""
+      }
+    ]
+  },
+  {
+    "day": 5,
+    "title": "Photos & People",
+    "vocab": [
+      ["张", "zhāng", "MW"],
+      ["片", "piàn", "Photo"],
+      ["这", "zhè", "This"],
+      ["那", "nà", "That"],
+      ["男", "nán", "Male"],
+      ["女", "nǚ", "Female"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个张怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège zhāng zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"MW\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个张的意思是\"MW\"",
+        "pinyin": "Zhège zhāng de yìsi shì \"MW\"",
+        "english": "This \"张\" means \"MW\""
+      }
+    ]
+  },
+  {
+    "day": 6,
+    "title": "Dates & Weeks",
+    "vocab": [
+      ["月", "yuè", "Month"],
+      ["号", "hào", "Date"],
+      ["星", "xīng", "Star"],
+      ["期", "qī", "Period"],
+      ["天", "tiān", "Day"],
+      ["年", "nián", "Year"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个月怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège yuè zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Month\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个月的意思是\"Month\"",
+        "pinyin": "Zhège yuè de yìsi shì \"Month\"",
+        "english": "This \"月\" means \"Month\""
+      }
+    ]
+  },
+  {
+    "day": 7,
+    "title": "Birthdays",
+    "vocab": [
+      ["生", "shēng", "Birth"],
+      ["日", "rì", "Sun/Day"],
+      ["岁", "suì", "Age"],
+      ["多", "duō", "Many"],
+      ["大", "dà", "Big"],
+      ["是", "shì", "To be"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个生怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège shēng zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Birth\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个生的意思是\"Birth\"",
+        "pinyin": "Zhège shēng de yìsi shì \"Birth\"",
+        "english": "This \"生\" means \"Birth\""
+      }
+    ]
+  },
+  {
+    "day": 8,
+    "title": "Meals & Likes",
+    "vocab": [
+      ["吃", "chī", "Eat"],
+      ["饭", "fàn", "Meal"],
+      ["菜", "cài", "Dish"],
+      ["喜", "xǐ", "Like"],
+      ["欢", "huān", "Happy"],
+      ["太", "tài", "Too"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个吃怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège chī zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Eat\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个吃的意思是\"Eat\"",
+        "pinyin": "Zhège chī de yìsi shì \"Eat\"",
+        "english": "This \"吃\" means \"Eat\""
+      }
+    ]
+  },
+  {
+    "day": 9,
+    "title": "Drinks",
+    "vocab": [
+      ["喝", "hē", "Drink"],
+      ["茶", "chá", "Tea"],
+      ["水", "shuǐ", "Water"],
+      ["咖", "kā", "Coffee"],
+      ["啡", "fēi", "Coffee"],
+      ["了", "le", "Prtcl."]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个喝怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège hē zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Drink\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个喝的意思是\"Drink\"",
+        "pinyin": "Zhège hē de yìsi shì \"Drink\"",
+        "english": "This \"喝\" means \"Drink\""
+      }
+    ]
+  },
+  {
+    "day": 10,
+    "title": "Hobbies 1",
+    "vocab": [
+      ["看", "kàn", "Watch"],
+      ["书", "shū", "Book"],
+      ["电", "diàn", "Elec."],
+      ["影", "yǐng", "Shadow"],
+      ["听", "tīng", "Listen"],
+      ["唱", "chàng", "Sing"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个看怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège kàn zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Watch\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个看的意思是\"Watch\"",
+        "pinyin": "Zhège kàn de yìsi shì \"Watch\"",
+        "english": "This \"看\" means \"Watch\""
+      }
+    ]
+  },
+  {
+    "day": 11,
+    "title": "Music & Sports",
+    "vocab": [
+      ["音", "yīn", "Sound"],
+      ["乐", "yuè", "Music"],
+      ["打", "dǎ", "Play"],
+      ["球", "qiú", "Ball"],
+      ["跳", "tiào", "Jump"],
+      ["舞", "wǔ", "Dance"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个音怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège yīn zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Sound\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个音的意思是\"Sound\"",
+        "pinyin": "Zhège yīn de yìsi shì \"Sound\"",
+        "english": "This \"音\" means \"Sound\""
+      }
+    ]
+  },
+  {
+    "day": 12,
+    "title": "Frequency",
+    "vocab": [
+      ["常", "cháng", "Often"],
+      ["去", "qù", "Go"],
+      ["对", "duì", "Right"],
+      ["错", "cuò", "Wrong"],
+      ["想", "xiǎng", "Want"],
+      ["觉", "jué", "Feel"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个常怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège cháng zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Often\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个常的意思是\"Often\"",
+        "pinyin": "Zhège cháng de yìsi shì \"Often\"",
+        "english": "This \"常\" means \"Often\""
+      }
+    ]
+  },
+  {
+    "day": 13,
+    "title": "Visiting Friends",
+    "vocab": [
+      ["进", "jìn", "Enter"],
+      ["来", "lái", "Come"],
+      ["快", "kuài", "Fast"],
+      ["坐", "zuò", "Sit"],
+      ["在", "zài", "At"],
+      ["哪", "nǎ", "Where"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个进怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège jìn zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Enter\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个进的意思是\"Enter\"",
+        "pinyin": "Zhège jìn de yìsi shì \"Enter\"",
+        "english": "This \"进\" means \"Enter\""
+      }
+    ]
+  },
+  {
+    "day": 14,
+    "title": "School Life",
+    "vocab": [
+      ["工", "gōng", "Work"],
+      ["作", "zuò", "Do"],
+      ["学", "xué", "Study"],
+      ["校", "xiào", "School"],
+      ["师", "shī", "Teacher"],
+      ["教", "jiào", "Teach"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个工怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège gōng zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Work\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个工的意思是\"Work\"",
+        "pinyin": "Zhège gōng de yìsi shì \"Work\"",
+        "english": "This \"工\" means \"Work\""
+      }
+    ]
+  },
+  {
+    "day": 15,
+    "title": "Introductions",
+    "vocab": [
+      ["漂", "piào", "Pretty"],
+      ["亮", "liàng", "Bright"],
+      ["认", "rèn", "Know"],
+      ["识", "shí", "Know"],
+      ["高兴", "gāoxìng", "Glad"],
+      ["给", "gěi", "Give"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个漂怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège piào zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Pretty\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个漂的意思是\"Pretty\"",
+        "pinyin": "Zhège piào de yìsi shì \"Pretty\"",
+        "english": "This \"漂\" means \"Pretty\""
+      }
+    ]
+  },
+  {
+    "day": 16,
+    "title": "Phone Calls",
+    "vocab": [
+      ["话", "huà", "Word"],
+      ["办", "bàn", "Handle"],
+      ["公", "gōng", "Public"],
+      ["室", "shì", "Room"],
+      ["等", "děng", "Wait"],
+      ["别", "bié", "Don't"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个话怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège huà zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Word\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个话的意思是\"Word\"",
+        "pinyin": "Zhège huà de yìsi shì \"Word\"",
+        "english": "This \"话\" means \"Word\""
+      }
+    ]
+  },
+  {
+    "day": 17,
+    "title": "Time Slots",
+    "vocab": [
+      ["下", "xià", "Next"],
+      ["午", "wǔ", "Noon"],
+      ["上", "shàng", "Past"],
+      ["节", "jié", "MW"],
+      ["课", "kè", "Class"],
+      ["到", "dào", "Arrive"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个下怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège xià zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Next\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个下的意思是\"Next\"",
+        "pinyin": "Zhège xià de yìsi shì \"Next\"",
+        "english": "This \"下\" means \"Next\""
+      }
+    ]
+  },
+  {
+    "day": 18,
+    "title": "Exams",
+    "vocab": [
+      ["考", "kǎo", "Test"],
+      ["试", "shì", "Try"],
+      ["空", "kòng", "Time"],
+      ["要", "yào", "Want"],
+      ["开", "kāi", "Open"],
+      ["会", "huì", "Meeting"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个考怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège kǎo zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Test\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个考的意思是\"Test\"",
+        "pinyin": "Zhège kǎo de yìsi shì \"Test\"",
+        "english": "This \"考\" means \"Test\""
+      }
+    ]
+  },
+  {
+    "day": 19,
+    "title": "Study Habits",
+    "vocab": [
+      ["写", "xiě", "Write"],
+      ["字", "zì", "Char."],
+      ["慢", "màn", "Slow"],
+      ["就", "jiù", "Then"],
+      ["怎", "zěn", "How"],
+      ["语", "yǔ", "Lang."]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个写怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège xiě zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Write\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个写的意思是\"Write\"",
+        "pinyin": "Zhège xiě de yìsi shì \"Write\"",
+        "english": "This \"写\" means \"Write\""
+      }
+    ]
+  },
+  {
+    "day": 20,
+    "title": "Languages",
+    "vocab": [
+      ["说", "shuō", "Speak"],
+      ["法", "fǎ", "Law"],
+      ["文", "wén", "Text"],
+      ["难", "nán", "Hard"],
+      ["平", "píng", "Flat"],
+      ["笔", "bǐ", "Pen"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个说怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège shuō zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Speak\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个说的意思是\"Speak\"",
+        "pinyin": "Zhège shuō de yìsi shì \"Speak\"",
+        "english": "This \"说\" means \"Speak\""
+      }
+    ]
+  },
+  {
+    "day": 21,
+    "title": "Directions",
+    "vocab": [
+      ["北", "běi", "North"],
+      ["南", "nán", "South"],
+      ["东", "dōng", "East"],
+      ["西", "xī", "West"],
+      ["边", "biān", "Side"],
+      ["远", "yuǎn", "Far"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个北怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège běi zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"North\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个北的意思是\"North\"",
+        "pinyin": "Zhège běi de yìsi shì \"North\"",
+        "english": "This \"北\" means \"North\""
+      }
+    ]
+  },
+  {
+    "day": 22,
+    "title": "Transport",
+    "vocab": [
+      ["走", "zǒu", "Walk"],
+      ["路", "lù", "Road"],
+      ["车", "chē", "Car"],
+      ["飞", "fēi", "Fly"],
+      ["机", "jī", "Machine"],
+      ["票", "piào", "Ticket"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个走怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège zǒu zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Walk\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个走的意思是\"Walk\"",
+        "pinyin": "Zhège zǒu de yìsi shì \"Walk\"",
+        "english": "This \"走\" means \"Walk\""
+      }
+    ]
+  },
+  {
+    "day": 23,
+    "title": "Shopping",
+    "vocab": [
+      ["买", "mǎi", "Buy"],
+      ["卖", "mài", "Sell"],
+      ["钱", "qián", "Money"],
+      ["块", "kuài", "MW"],
+      ["百", "bǎi", "100"],
+      ["件", "jiàn", "MW"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个买怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège mǎi zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Buy\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个买的意思是\"Buy\"",
+        "pinyin": "Zhège mǎi de yìsi shì \"Buy\"",
+        "english": "This \"买\" means \"Buy\""
+      }
+    ]
+  },
+  {
+    "day": 24,
+    "title": "Colors",
+    "vocab": [
+      ["红", "hóng", "Red"],
+      ["黄", "huáng", "Yellow"],
+      ["蓝", "lán", "Blue"],
+      ["白", "bái", "White"],
+      ["黑", "hēi", "Black"],
+      ["穿", "chuān", "Wear"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个红怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège hóng zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Red\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个红的意思是\"Red\"",
+        "pinyin": "Zhège hóng de yìsi shì \"Red\"",
+        "english": "This \"红\" means \"Red\""
+      }
+    ]
+  },
+  {
+    "day": 25,
+    "title": "Weather",
+    "vocab": [
+      ["冷", "lěng", "Cold"],
+      ["热", "rè", "Hot"],
+      ["雨", "yǔ", "Rain"],
+      ["雪", "xuě", "Snow"],
+      ["风", "fēng", "Wind"],
+      ["最", "zuì", "Most"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！请问，这个冷怎么说？",
+        "pinyin": "Nǐ hǎo! Qǐngwèn, zhège lěng zěnme shuō?",
+        "english": "Hello! Excuse me, how do you say this \"Cold\"?"
+      },
+      {
+        "speaker": "B",
+        "chinese": "这个冷的意思是\"Cold\"",
+        "pinyin": "Zhège lěng de yìsi shì \"Cold\"",
+        "english": "This \"冷\" means \"Cold\""
+      }
+    ]
+  },
+  {
+    "day": 26,
+    "title": "Review 1-30",
+    "vocab": [
+      ["你", "nǐ", "You"],
+      ["好", "hǎo", "Good"],
+      ["请", "qǐng", "Please"],
+      ["问", "wèn", "Ask"],
+      ["贵", "guì", "Noble"],
+      ["姓", "xìng", "Surname"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！我们复习吧。",
+        "pinyin": "Nǐ hǎo! Wǒmen fùxí ba.",
+        "english": "Hello! Let's review."
+      },
+      {
+        "speaker": "B",
+        "chinese": "好主意，我们开始吧。",
+        "pinyin": "Hǎo zhǔyì, wǒmen kāishǐ ba.",
+        "english": "Good idea, let's start."
+      }
+    ]
+  },
+  {
+    "day": 27,
+    "title": "Review 31-60",
+    "vocab": [
+      ["月", "yuè", "Month"],
+      ["号", "hào", "Date"],
+      ["星", "xīng", "Star"],
+      ["期", "qī", "Period"],
+      ["天", "tiān", "Day"],
+      ["年", "nián", "Year"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！我们复习吧。",
+        "pinyin": "Nǐ hǎo! Wǒmen fùxí ba.",
+        "english": "Hello! Let's review."
+      },
+      {
+        "speaker": "B",
+        "chinese": "好主意，我们开始吧。",
+        "pinyin": "Hǎo zhǔyì, wǒmen kāishǐ ba.",
+        "english": "Good idea, let's start."
+      }
+    ]
+  },
+  {
+    "day": 28,
+    "title": "Review 61-90",
+    "vocab": [
+      ["音", "yīn", "Sound"],
+      ["乐", "yuè", "Music"],
+      ["打", "dǎ", "Play"],
+      ["球", "qiú", "Ball"],
+      ["跳", "tiào", "Jump"],
+      ["舞", "wǔ", "Dance"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！我们复习吧。",
+        "pinyin": "Nǐ hǎo! Wǒmen fùxí ba.",
+        "english": "Hello! Let's review."
+      },
+      {
+        "speaker": "B",
+        "chinese": "好主意，我们开始吧。",
+        "pinyin": "Hǎo zhǔyì, wǒmen kāishǐ ba.",
+        "english": "Good idea, let's start."
+      }
+    ]
+  },
+  {
+    "day": 29,
+    "title": "Review 91-120",
+    "vocab": [
+      ["漂", "piào", "Pretty"],
+      ["亮", "liàng", "Bright"],
+      ["认", "rèn", "Know"],
+      ["识", "shí", "Know"],
+      ["高兴", "gāoxìng", "Glad"],
+      ["给", "gěi", "Give"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！我们复习吧。",
+        "pinyin": "Nǐ hǎo! Wǒmen fùxí ba.",
+        "english": "Hello! Let's review."
+      },
+      {
+        "speaker": "B",
+        "chinese": "好主意，我们开始吧。",
+        "pinyin": "Hǎo zhǔyì, wǒmen kāishǐ ba.",
+        "english": "Good idea, let's start."
+      }
+    ]
+  },
+  {
+    "day": 30,
+    "title": "Final Mastery",
+    "vocab": [
+      ["北", "běi", "North"],
+      ["南", "nán", "South"],
+      ["东", "dōng", "East"],
+      ["西", "xī", "West"],
+      ["边", "biān", "Side"],
+      ["远", "yuǎn", "Far"]
+    ],
+    "dialogue": [
+      {
+        "speaker": "A",
+        "chinese": "你好！我们复习吧。",
+        "pinyin": "Nǐ hǎo! Wǒmen fùxí ba.",
+        "english": "Hello! Let's review."
+      },
+      {
+        "speaker": "B",
+        "chinese": "好主意，我们开始吧。",
+        "pinyin": "Hǎo zhǔyì, wǒmen kāishǐ ba.",
+        "english": "Good idea, let's start."
+      }
+    ]
+  }
+]

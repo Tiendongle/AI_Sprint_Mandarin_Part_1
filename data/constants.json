@@ -1,0 +1,203 @@
+{
+  "themes": [
+    {
+      "id": "midnight",
+      "name": "Midnight Red",
+      "bg": "#121212",
+      "header": "#1a1a1a",
+      "card": "#1e1e1e",
+      "primary": "#FF4D4D",
+      "secondary": "#4D94FF",
+      "accent": "#FFD700",
+      "text": "#E0E0E0",
+      "muted": "#9CA3AF",
+      "border": "#2a2a2a"
+    },
+    {
+      "id": "sakura",
+      "name": "Sakura Pastel",
+      "bg": "#FFF5F7",
+      "header": "#FFFFFF",
+      "card": "#FFFFFF",
+      "primary": "#FF85A2",
+      "secondary": "#BDE0FE",
+      "accent": "#D8E2DC",
+      "text": "#5F4B4B",
+      "muted": "#A89999",
+      "border": "#FFE0E6"
+    },
+    {
+      "id": "matcha",
+      "name": "Matcha Mint",
+      "bg": "#F3F6F1",
+      "header": "#FFFFFF",
+      "card": "#FFFFFF",
+      "primary": "#76885B",
+      "secondary": "#DDA15E",
+      "accent": "#ADC4CE",
+      "text": "#283618",
+      "muted": "#8B9A6B",
+      "border": "#E2E8DE"
+    },
+    {
+      "id": "synthwave",
+      "name": "Neon Dreams",
+      "bg": "#120422",
+      "header": "#1A0B2E",
+      "card": "#241244",
+      "primary": "#F0ABFC",
+      "secondary": "#22D3EE",
+      "accent": "#F472B6",
+      "text": "#F5F3FF",
+      "muted": "#A78BFA",
+      "border": "#4C1D95"
+    },
+    {
+      "id": "nord",
+      "name": "Nordic Frost",
+      "bg": "#2E3440",
+      "header": "#3B4252",
+      "card": "#3B4252",
+      "primary": "#88C0D0",
+      "secondary": "#A3BE8C",
+      "accent": "#EBCB8B",
+      "text": "#ECEFF4",
+      "muted": "#D8DEE9",
+      "border": "#434C5E"
+    },
+    {
+      "id": "minimal",
+      "name": "Ink & Paper",
+      "bg": "#FDFDFD",
+      "header": "#F5F5F5",
+      "card": "#FFFFFF",
+      "primary": "#111111",
+      "secondary": "#666666",
+      "accent": "#999999",
+      "text": "#111111",
+      "muted": "#888888",
+      "border": "#EEEEEE"
+    },
+    {
+      "id": "desert",
+      "name": "Desert Dune",
+      "bg": "#FAF3E0",
+      "header": "#FFFFFF",
+      "card": "#FFFFFF",
+      "primary": "#BC6C25",
+      "secondary": "#8E9775",
+      "accent": "#E28E8E",
+      "text": "#432818",
+      "muted": "#997B66",
+      "border": "#F1E4D8"
+    },
+    {
+      "id": "cyber",
+      "name": "Cyberpunk",
+      "bg": "#000000",
+      "header": "#0a0a0a",
+      "card": "#111111",
+      "primary": "#FAFF00",
+      "secondary": "#FF00FF",
+      "accent": "#00FFFF",
+      "text": "#FFFFFF",
+      "muted": "#666666",
+      "border": "#222222"
+    },
+    {
+      "id": "ocean",
+      "name": "Deep Pacific",
+      "bg": "#081C15",
+      "header": "#1B4332",
+      "card": "#2D6A4F",
+      "primary": "#D8F3DC",
+      "secondary": "#52B788",
+      "accent": "#FFD700",
+      "text": "#FDFDFD",
+      "muted": "#B7E4C7",
+      "border": "#1B4332"
+    },
+    {
+      "id": "lavender",
+      "name": "Lavender Fields",
+      "bg": "#F8F7FF",
+      "header": "#FFFFFF",
+      "card": "#FFFFFF",
+      "primary": "#9381FF",
+      "secondary": "#B8B8FF",
+      "accent": "#FFD6BA",
+      "text": "#2B2D42",
+      "muted": "#8D99AE",
+      "border": "#EEEBFF"
+    }
+  ],
+  "toneGuide": [
+    {
+      "name": "First Tone",
+      "mark": "ā",
+      "desc": "High and level. Imagine a flat horizontal line.",
+      "example": "mā (Mother)",
+      "character": "妈"
+    },
+    {
+      "name": "Second Tone",
+      "mark": "á",
+      "desc": "Rising. Like asking a question: \"What?\"",
+      "example": "má (Hemp)",
+      "character": "麻"
+    },
+    {
+      "name": "Third Tone",
+      "mark": "ǎ",
+      "desc": "Falling then rising. Like saying a hesitant \"Well...\"",
+      "example": "mǎ (Horse)",
+      "character": "马"
+    },
+    {
+      "name": "Fourth Tone",
+      "mark": "à",
+      "desc": "Falling. Sharp and short, like a command: \"No!\"",
+      "example": "mà (Scold)",
+      "character": "骂"
+    }
+  ],
+  "pronunciation": [
+    {
+      "category": "The Hard Initials",
+      "description": "Retroflex sounds. Curl your tongue slightly toward the roof of your mouth.",
+      "sounds": [
+        { "pinyin": "zh", "soundsLike": "\"j\" in \"judge\"", "example": "中 (zhōng)", "audioHint": "中" },
+        { "pinyin": "ch", "soundsLike": "\"ch\" in \"church\"", "example": "茶 (chá)", "audioHint": "茶" },
+        { "pinyin": "sh", "soundsLike": "\"sh\" in \"shirt\"", "example": "书 (shū)", "audioHint": "书" },
+        { "pinyin": "r", "soundsLike": "\"r\" in \"raw\"", "example": "日 (rì)", "audioHint": "日" }
+      ]
+    },
+    {
+      "category": "The Dental Sibilants",
+      "description": "Flat sounds. Keep your tongue flat behind your lower front teeth.",
+      "sounds": [
+        { "pinyin": "z", "soundsLike": "\"ds\" in \"reads\"", "example": "字 (zì)", "audioHint": "字" },
+        { "pinyin": "c", "soundsLike": "\"ts\" in \"cats\"", "example": "菜 (cài)", "audioHint": "菜" },
+        { "pinyin": "s", "soundsLike": "\"s\" in \"sun\"", "example": "岁 (suì)", "audioHint": "岁" }
+      ]
+    },
+    {
+      "category": "Palatal Sounds",
+      "description": "High and sharp. The front of the tongue touches the hard palate.",
+      "sounds": [
+        { "pinyin": "j", "soundsLike": "\"j\" in \"jeep\"", "example": "叫 (jiào)", "audioHint": "叫" },
+        { "pinyin": "q", "soundsLike": "\"ch\" in \"cheap\"", "example": "请 (qǐng)", "audioHint": "请" },
+        { "pinyin": "x", "soundsLike": "\"sh\" in \"she\"", "example": "姓 (xìng)", "audioHint": "姓" }
+      ]
+    },
+    {
+      "category": "Special Vowels",
+      "description": "Tricky vowels that change sound based on surrounding letters.",
+      "sounds": [
+        { "pinyin": "ü", "soundsLike": "\"ee\" with rounded lips", "example": "女 (nǚ)", "audioHint": "女" },
+        { "pinyin": "ian", "soundsLike": "like \"ee-en\"", "example": "片 (piàn)", "audioHint": "片" },
+        { "pinyin": "er", "soundsLike": "like \"are\"", "example": "二 (èr)", "audioHint": "二" }
+      ]
+    }
+  ]
+}
