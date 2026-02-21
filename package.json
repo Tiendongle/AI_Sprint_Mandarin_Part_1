@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sync:flutter": "cp ./data/lessons.json ../flutter_app/assets/data/lessons.json && cp ./data/constants.json ../flutter_app/assets/data/constants.json"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.3",
