@@ -107,19 +107,22 @@ class LessonTab extends StatelessWidget {
               elevation: 1.0,
               margin: const EdgeInsets.symmetric(vertical: 4.0),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Speaker ${dialogueLine.speaker}', style: TextStyle(fontSize: 10.0, color: theme.secondary, fontWeight: FontWeight.bold, letterSpacing: 1.1)),
-                    const SizedBox(height: 8.0),
-                    Text(dialogueLine.chinese, style: TextStyle(fontSize: 20.0, color: theme.primary, fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 4.0),
-                    Text(dialogueLine.pinyin, style: TextStyle(fontSize: 14.0, color: theme.muted, fontStyle: FontStyle.italic, fontFamily: 'monospace')),
-                    const Divider(height: 24.0),
-                    Text(dialogueLine.english, style: TextStyle(fontSize: 14.0, color: theme.text)),
-                  ],
+              child: InkWell(
+                onTap: () => AudioHelper().speak(dialogueLine.chinese),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Speaker ${dialogueLine.speaker}', style: TextStyle(fontSize: 10.0, color: theme.secondary, fontWeight: FontWeight.bold, letterSpacing: 1.1)),
+                      const SizedBox(height: 8.0),
+                      Text(dialogueLine.chinese, style: TextStyle(fontSize: 20.0, color: theme.primary, fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 4.0),
+                      Text(dialogueLine.pinyin, style: TextStyle(fontSize: 14.0, color: theme.muted, fontStyle: FontStyle.italic, fontFamily: 'monospace')),
+                      const Divider(height: 24.0),
+                      Text(dialogueLine.english, style: TextStyle(fontSize: 14.0, color: theme.text)),
+                    ],
+                  ),
                 ),
               ),
             );

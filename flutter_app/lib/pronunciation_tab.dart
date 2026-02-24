@@ -1,13 +1,13 @@
 
 import 'package:flutter/material.dart';
-import 'models.dart';
-import 'constants.dart';
 import 'audio_helper.dart';
+import 'models.dart';
 
 class PronunciationTab extends StatelessWidget {
+  final List<Map<String, dynamic>> pronunciationData;
   final AppTheme theme;
 
-  const PronunciationTab({super.key, required this.theme});
+  const PronunciationTab({super.key, required this.pronunciationData, required this.theme});
 
   @override
   Widget build(BuildContext context) {
@@ -23,28 +23,20 @@ class PronunciationTab extends StatelessWidget {
           child: ExpansionTile(
             title: Text(category['category'] as String, style: TextStyle(color: theme.primary, fontWeight: FontWeight.bold)),
             subtitle: Text(category['description'] as String, style: TextStyle(color: theme.muted)),
-            children: (category['sounds'] as List<Map<String, String>>).map((sound) {
+            children: (category['sounds'] as List<dynamic>).map((soundData) {
+              final sound = soundData as Map<String, dynamic>;
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(sound['pinyin']!, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: theme.text)),
-                        Text(sound['soundsLike']!, style: TextStyle(fontSize: 12, color: theme.muted)),
-                      ],
+                    Text(sound['pinyin'] as String, style: TextStyle(fontSize: 18.0, color: theme.primary, fontWeight: FontWeight.bold, fontFamily: 'monospace')),
+                    const SizedBox(width: 16.0),
+                    Text(sound['example'] as String, style: TextStyle(fontSize: 18.0, color: theme.text)),
+                    const Spacer(),
+                    IconButton(
+                      icon: Icon(Icons.volume_up, color: theme.secondary),
+                      onPressed: () => AudioHelper().speak(sound['pinyin'] as String),
                     ),
-                    Row(
-                      children: [
-                        Text(sound['example']!, style: TextStyle(fontSize: 16, color: theme.secondary)),
-                        IconButton(
-                          icon: Icon(Icons.volume_up, color: theme.accent),
-                          onPressed: () => AudioHelper().speak(sound['pinyin']!),
-                        ),
-                      ],
-                    )
                   ],
                 ),
               );
