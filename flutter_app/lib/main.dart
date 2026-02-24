@@ -195,7 +195,7 @@ class _MainPageState extends State<MainPage> {
           children: [
             LessonTab(lesson: currentLesson, theme: _currentTheme),
             FlashcardsTab(lesson: currentLesson, theme: _currentTheme),
-            PronunciationTab(theme: _currentTheme),
+            PronunciationTab(theme: _currentTheme, pronunciationData: pronunciationData),
             ToneGuideTab(theme: _currentTheme),
           ],
         ),
