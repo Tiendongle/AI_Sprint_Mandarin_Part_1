@@ -14,8 +14,8 @@ class FlashcardsTab extends StatefulWidget {
   State<FlashcardsTab> createState() => _FlashcardsTabState();
 }
 
-class _FlashcardsTabState extends State<FlashcardsTab> {
-  bool _isFlipped = false;
+class _FlashcardsTabState extends State<FlashcardsTab> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
   int _flashcardIndex = 0;
   late List<VocabItem> _shuffledVocab;
 
@@ -23,6 +23,16 @@ class _FlashcardsTabState extends State<FlashcardsTab> {
   void initState() {
     super.initState();
     _shuffledVocab = List.from(widget.lesson.vocab)..shuffle();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -32,7 +42,7 @@ class _FlashcardsTabState extends State<FlashcardsTab> {
       setState(() {
         _shuffledVocab = List.from(widget.lesson.vocab)..shuffle();
         _flashcardIndex = 0;
-        _isFlipped = false;
+        _controller.reset();
       });
     }
   }
@@ -41,16 +51,16 @@ class _FlashcardsTabState extends State<FlashcardsTab> {
     setState(() {
       _shuffledVocab.shuffle();
       _flashcardIndex = 0;
-      _isFlipped = false;
+      _controller.reset();
     });
   }
 
   void _nextCard() {
     setState(() {
-      _isFlipped = false;
       if (_shuffledVocab.isNotEmpty) {
         _flashcardIndex = (_flashcardIndex + 1) % _shuffledVocab.length;
       }
+      _controller.reset();
     });
   }
 
@@ -82,7 +92,13 @@ class _FlashcardsTabState extends State<FlashcardsTab> {
           ),
           const SizedBox(height: 24.0),
           GestureDetector(
-            onTap: () => setState(() => _isFlipped = !_isFlipped),
+            onTap: () {
+              if (_controller.status == AnimationStatus.dismissed || _controller.status == AnimationStatus.reverse) {
+                _controller.forward();
+              } else {
+                _controller.reverse();
+              }
+            },
             child: _buildFlipCard(vocabItem),
           ),
           const SizedBox(height: 24.0),
@@ -113,33 +129,25 @@ class _FlashcardsTabState extends State<FlashcardsTab> {
   }
 
   Widget _buildFlipCard(VocabItem vocabItem) {
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 600),
-      transitionBuilder: (Widget child, Animation<double> animation) {
-        final rotate = Tween(begin: pi, end: 0.0).animate(animation);
-        return AnimatedBuilder(
-          animation: rotate,
-          builder: (BuildContext context, Widget? child) {
-            final isUnder = (ValueKey(_isFlipped) != child?.key);
-            var tilt = ((animation.value - 0.5).abs() - 0.5) * 0.003;
-            tilt *= isUnder ? -1.0 : 1.0;
-            final value = isUnder ? min(rotate.value, pi / 2) : rotate.value;
-            return Transform(
-              transform: Matrix4.rotationY(value)..setEntry(3, 0, tilt),
-              alignment: Alignment.center,
-              child: child,
-            );
-          },
-          child: _isFlipped ? _buildCardFace(vocabItem, false) : _buildCardFace(vocabItem, true),
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        final isFlipped = _controller.value >= 0.5;
+        final cardFace = isFlipped ? _buildCardFace(vocabItem, false) : _buildCardFace(vocabItem, true);
+
+        return Transform(
+          alignment: Alignment.center,
+          transform: Matrix4.identity()
+            ..setEntry(3, 2, 0.001) // perspective
+            ..rotateY(_controller.value * pi),
+          child: isFlipped ? Transform(transform: Matrix4.rotationY(pi), alignment: Alignment.center, child: cardFace) : cardFace,
         );
       },
-      child: const SizedBox.shrink(),
     );
   }
 
   Widget _buildCardFace(VocabItem vocabItem, bool isFront) {
     return Card(
-      key: ValueKey(isFront),
       color: isFront ? widget.theme.card : widget.theme.primary,
       elevation: 4.0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0)),
