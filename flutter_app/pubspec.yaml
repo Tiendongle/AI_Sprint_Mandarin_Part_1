@@ -1,6 +1,6 @@
-name: flutter_app
-description: "A new Flutter project."
-publish_to: 'none' 
+name: mandarin_sprint
+description: "Mandarin Sprint is a cross-platform mobile application built with Flutter, designed to help beginners learn the fundamentals of Mandarin Chinese in just 30 days. The app follows a structured, day-by-day curriculum that makes learning manageable and effective."
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
@@ -17,11 +17,19 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.13.1
 
 dependency_overrides:
   meta: ^1.18.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.png"
+  remove_alpha_ios: true
 
 flutter:
   uses-material-design: true
   assets:
     - assets/data/
+    - assets/icon.png
