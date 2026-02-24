@@ -163,19 +163,19 @@ class _MainPageState extends State<MainPage> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: _currentTheme.text,
+                  color: _currentTheme.primary,
                 ),
               ),
               Row(
                 children: [
                   IconButton(
                     icon: const Icon(Icons.palette),
-                    color: _currentTheme.text,
+                    color: _currentTheme.primary,
                     onPressed: _showThemePicker,
                   ),
                   TextButton(
                     onPressed: _resetProgress,
-                    child: Text('Reset', style: TextStyle(color: _currentTheme.text)),
+                    child: Text('Reset', style: TextStyle(color: _currentTheme.primary)),
                   ),
                 ],
               ),
