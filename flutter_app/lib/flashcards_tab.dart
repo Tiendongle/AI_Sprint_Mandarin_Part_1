@@ -161,7 +161,7 @@ class _FlashcardsTabState extends State<FlashcardsTab> with SingleTickerProvider
                 ? [
                     Text(vocabItem.char, style: TextStyle(fontSize: 96, fontWeight: FontWeight.bold, color: widget.theme.primary)),
                     IconButton(
-                      icon: Icon(Icons.volume_up, color: widget.theme.accent, size: 32),
+                      icon: Icon(Icons.volume_up, color: widget.theme.secondary, size: 32),
                       onPressed: () => AudioHelper().speak(vocabItem.char),
                     )
                   ]

@@ -27,6 +27,7 @@ class PronunciationTab extends StatelessWidget {
             children: (category['sounds'] as List<dynamic>).map((soundData) {
               final sound = soundData as Map<String, dynamic>;
               return InkWell(
+                borderRadius: BorderRadius.circular(16.0),
                 onTap: () => AudioHelper().speak(sound['audioHint'] as String),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),

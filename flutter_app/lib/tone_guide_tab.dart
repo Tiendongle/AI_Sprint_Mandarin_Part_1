@@ -22,6 +22,7 @@ class ToneGuideTab extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 8.0),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
           child: InkWell(
+            borderRadius: BorderRadius.circular(16.0),
             onTap: () => AudioHelper().speak(tone['character']!),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
