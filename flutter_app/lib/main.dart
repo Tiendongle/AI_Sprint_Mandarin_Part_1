@@ -158,22 +158,24 @@ class _MainPageState extends State<MainPage> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 '30-Day Sprint',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
+                  color: _currentTheme.text,
                 ),
               ),
               Row(
                 children: [
                   IconButton(
                     icon: const Icon(Icons.palette),
+                    color: _currentTheme.text,
                     onPressed: _showThemePicker,
                   ),
                   TextButton(
                     onPressed: _resetProgress,
-                    child: const Text('Reset'),
+                    child: Text('Reset', style: TextStyle(color: _currentTheme.text)),
                   ),
                 ],
               ),
@@ -212,11 +214,11 @@ class _MainPageState extends State<MainPage> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 8.0, bottom: 8.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
             child: Text(
               'Timeline Day',
-              style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, letterSpacing: 1.2),
+              style: TextStyle(fontSize: 10.0, color: _currentTheme.text, fontWeight: FontWeight.bold, letterSpacing: 1.2),
             ),
           ),
           SizedBox(

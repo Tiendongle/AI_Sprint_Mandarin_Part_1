@@ -65,6 +65,7 @@ class LessonTab extends StatelessWidget {
               elevation: 1.0,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
               child: InkWell(
+                borderRadius: BorderRadius.circular(16.0),
                 onTap: () => AudioHelper().speak(vocabItem.char),
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
@@ -108,6 +109,7 @@ class LessonTab extends StatelessWidget {
               margin: const EdgeInsets.symmetric(vertical: 4.0),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
               child: InkWell(
+                borderRadius: BorderRadius.circular(16.0),
                 onTap: () => AudioHelper().speak(dialogueLine.chinese),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
