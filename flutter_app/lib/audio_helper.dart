@@ -30,7 +30,7 @@ class AudioHelper {
 
   // Speaks the given text and waits for it to complete
   Future<void> speak(String text) async {
-    await _flutterTts.setAwaitSpeakCompletion(true);
+    await _flutterTts.awaitSpeakCompletion(true);
     await _flutterTts.speak(text);
   }
 }
